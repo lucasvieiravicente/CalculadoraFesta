@@ -5,14 +5,15 @@
         private const decimal costOfFoodPerPerson = 25;
 
         private int numberOfPeople;
-        private decimal costOfBeveragesPerPerson;
         private decimal costOfDecorations;
+        private decimal costOfBeveragesPerPerson;        
         private bool fancyParty;
+        private bool healthyParty;
 
         public int NumberOfPeople
         {
             get { return numberOfPeople; }
-            set { numberOfPeople = value; CalculateCostOfDecorations(fancyParty); }
+            set { numberOfPeople = value; CalculateCostOfDecorations(fancyParty); SetHealthOption(healthyParty); }
         }
 
         public DinnerParty(int numberOfPeople, bool fancyParty, bool healthyParty)
@@ -23,10 +24,10 @@
             CalculateCostOfDecorations(fancyParty);
         }
 
-        public void SetHealthOption(bool fancy)
+        public void SetHealthOption(bool healthy)
         {
-            fancyParty = fancy;
-            if (fancy)
+            healthyParty = healthy;
+            if (healthyParty)
                 costOfBeveragesPerPerson = 5;
             else
                 costOfBeveragesPerPerson = 20;
@@ -38,7 +39,7 @@
                 costOfDecorations = (NumberOfPeople * 15.00M) + 50;
 
             else
-                costOfDecorations = (NumberOfPeople * 7.50M) + 50;
+                costOfDecorations = (NumberOfPeople * 7.50M) + 30;
         }
         
         public decimal CalculateCost(bool healthy)
