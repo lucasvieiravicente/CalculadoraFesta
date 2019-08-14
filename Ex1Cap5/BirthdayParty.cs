@@ -2,16 +2,16 @@
 
 namespace Ex1Cap5
 {
-    class BirthdayParty
+    class BirthdayParty : Party
     {
-        private const decimal costOfFoodPerPerson = 25;
-
-        private int numberOfPeople;
-        private decimal costOfDecorations;
-        private bool fancyParty;
         private string cakeWriting = "";
-
         public int CakeSize;
+
+        public BirthdayParty(int numberOfPeople, bool fancyParty, string cakeWriting) : base(numberOfPeople, fancyParty)
+        {
+            CalculateCakeSize();
+            CakeWriting = cakeWriting;            
+        }
 
         public string CakeWriting
         {
@@ -39,29 +39,11 @@ namespace Ex1Cap5
             }
         }
 
-        public int NumberOfPeople
+        public override int NumberOfPeople
         {
-            get { return numberOfPeople; }
-            set { numberOfPeople = value; CalculateCostOfDecorations(fancyParty); CalculateCakeSize(); CakeWriting = cakeWriting; }
-        }
-
-        public BirthdayParty(int numberOfPeople, bool fancyParty, string cakeWriting)
-        {
-            this.numberOfPeople = numberOfPeople;
-            this.fancyParty = fancyParty;
-            CalculateCakeSize();
-            CakeWriting = cakeWriting;
-            CalculateCostOfDecorations(fancyParty);
-        }
-
-        public void CalculateCostOfDecorations(bool fancy)
-        {
-            if (fancy)
-                costOfDecorations = (NumberOfPeople * 15.00M) + 50;
-
-            else
-                costOfDecorations = (NumberOfPeople * 7.50M) + 30;
-        }
+            get { return base.NumberOfPeople; }
+            set { base.NumberOfPeople = value; CalculateCakeSize(); CakeWriting = cakeWriting; }
+        }       
 
         public void CalculateCakeSize()
         {
@@ -71,17 +53,17 @@ namespace Ex1Cap5
                 CakeSize = 16;
         }
 
-        public decimal CalculateCost()
+        public override decimal CalculateCost()
         {
-            decimal TotalCost = costOfDecorations + (costOfFoodPerPerson * NumberOfPeople);
+            decimal totalCost = base.CalculateCost();            
             decimal CakeCost;
 
             if (CakeSize == 8)
                 CakeCost = 40M + CakeWriting.Length * .25M;
             else
                 CakeCost = 75M + CakeWriting.Length * .25M;
-
-            return TotalCost + CakeCost;
+            
+            return totalCost + CakeCost;
         }
     }
 }

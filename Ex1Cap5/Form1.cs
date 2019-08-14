@@ -32,7 +32,7 @@ namespace Ex1Cap5
 
         private void DisplayDinnerPartyCost()
         {
-            costLabel.Text = dinnerParty.CalculateCost(healthyOption.Checked).ToString("C");            
+            costLabel.Text = dinnerParty.CalculateCost().ToString("C");            
         }
 
         private void fancyOption_CheckedChanged(object sender, EventArgs e)
